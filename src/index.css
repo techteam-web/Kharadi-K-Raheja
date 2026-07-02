@@ -1,0 +1,112 @@
+@import 'tailwindcss';
+
+@theme {
+  /* ---- Brand color system ---- */
+  --color-paper: #ffffff;
+  --color-ink: #111111;
+  --color-ink-muted: #666666;
+  --color-hairline: #e8e8e8;
+  --color-surface: #fafafa;
+
+  --color-blue: #0054a6;
+  --color-blue-deep: #003d7a;
+  --color-blue-tint: #eaf1f8;
+
+  --color-green: #00a651;
+  --color-green-deep: #00783b;
+  --color-green-tint: #e8f7ee;
+
+  /* ---- Type ---- */
+  --font-display: 'Playfair Display', 'Georgia', serif;
+  --font-body: 'Inter', 'Segoe UI', sans-serif;
+
+  /* ---- Radius ---- */
+  --radius-none: 0px;
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --radius-lg: 16px;
+
+  /* ---- Motion ---- */
+  --ease-architectural: cubic-bezier(0.22, 1, 0.36, 1);
+
+  /* ---- Letter spacing ---- */
+  --tracking-wide-label: 0.16em;
+}
+
+@layer base {
+  * {
+    box-sizing: border-box;
+  }
+
+  html {
+    background: var(--color-paper);
+    color-scheme: light;
+  }
+
+  body {
+    margin: 0;
+    font-family: var(--font-body);
+    color: var(--color-ink);
+    background: var(--color-paper);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+    overflow: hidden;
+  }
+
+  #root {
+    width: 100%;
+    height: 100svh;
+  }
+
+  h1, h2, h3, h4 {
+    font-family: var(--font-display);
+    font-weight: 500;
+    letter-spacing: -0.01em;
+    margin: 0;
+  }
+
+  p {
+    margin: 0;
+  }
+
+  ::selection {
+    background: var(--color-blue);
+    color: var(--color-paper);
+  }
+
+  /* Slim, quiet scrollbars for kiosk feel */
+  ::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+  ::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: var(--color-hairline);
+    border-radius: 4px;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: var(--color-ink-muted);
+  }
+
+  button {
+    font-family: inherit;
+    cursor: pointer;
+  }
+}
+
+@layer utilities {
+  .label-caps {
+    font-family: var(--font-body);
+    font-size: 0.6875rem;
+    font-weight: 600;
+    letter-spacing: var(--tracking-wide-label);
+    text-transform: uppercase;
+  }
+
+  .text-balance {
+    text-wrap: balance;
+  }
+}
