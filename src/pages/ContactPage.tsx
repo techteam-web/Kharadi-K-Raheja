@@ -1,7 +1,7 @@
 import { motion } from 'framer-motion';
 import { MapPin, Phone, Mail, Globe } from 'lucide-react';
 import { PageHeader } from '@/components/ui/PageHeader';
-import { MediaPlate } from '@/components/ui/MediaPlate';
+import { ContactMap } from '@/features/contact/ContactMap';
 import { fadeUp, staggerChildren } from '@/animations/motion';
 
 const CONTACT_ROWS = [
@@ -64,12 +64,7 @@ export default function ContactPage() {
       </div>
 
       <div className="relative h-56 w-full sm:h-72 lg:h-full">
-        <MediaPlate tone="cool" className="h-full w-full" label="Site Map — Kharadi, Pune" />
-        <div className="absolute inset-0 flex items-center justify-center">
-          <span className="flex h-11 w-11 items-center justify-center rounded-full bg-blue text-paper shadow-lg sm:h-12 sm:w-12">
-            <MapPin size={20} />
-          </span>
-        </div>
+        <ContactMap />
       </div>
     </div>
   );
