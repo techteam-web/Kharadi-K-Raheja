@@ -6,7 +6,7 @@ export default function HomePage() {
   const navigate = useNavigate();
 
   return (
-    <div>
+    <div className="h-full">
       <HeroSection
         onExplore={() => navigate('/about')}
         onViewLocation={() => navigate('/location')}
