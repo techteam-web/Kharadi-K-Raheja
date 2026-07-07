@@ -58,7 +58,7 @@ export function HeroSection({ onExplore, onViewLocation, onDownload }: HeroSecti
             <Button variant="primary" onClick={onExplore}>
               Explore Experience
             </Button>
-            <Button variant="secondary" onClick={onViewLocation} className="!border-paper/30 !text-paper hover:!border-paper">
+            <Button variant="secondary" onClick={onViewLocation} className="glass-dark !text-paper hover:!bg-white/10">
               View Location
             </Button>
             <Button variant="accent" onClick={onDownload}>

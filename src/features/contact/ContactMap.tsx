@@ -10,10 +10,10 @@ function buildSiteMarkerElement() {
   const el = document.createElement('div');
   el.className = 'flex flex-col items-center gap-1.5';
   el.innerHTML = `
-    <span class="rounded-md border border-hairline bg-paper px-3 py-1.5 shadow-md whitespace-nowrap">
+    <span class="glass rounded-full px-3.5 py-1.5 whitespace-nowrap">
       <span class="label-caps text-ink">Kharadi 57</span>
     </span>
-    <span class="h-3.5 w-3.5 rounded-full border-2 border-paper bg-blue shadow"></span>
+    <span class="h-3.5 w-3.5 rounded-full border-2 border-white/80 bg-blue shadow"></span>
   `;
   return el;
 }

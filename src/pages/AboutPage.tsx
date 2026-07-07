@@ -21,16 +21,16 @@ export default function AboutPage() {
   const ActiveComponent = TABS.find((t) => t.id === activeTab)!.Component;
 
   return (
-    <div className="flex h-full flex-col px-4 pt-6 pb-4 sm:px-8 sm:pt-10 sm:pb-6 lg:px-20 lg:pt-14 lg:pb-10">
+    <div className="flex h-full flex-col px-4 pt-6 pb-4 sm:px-8 sm:pt-10 sm:pb-6 lg:pt-14 lg:pb-10 lg:pl-20 lg:pr-28 xl:pr-32">
       <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
         <span className="label-caps text-ink-muted">About</span>
-        <div className="flex items-center gap-1 overflow-x-auto rounded-lg border border-hairline p-1.5">
+        <div className="glass flex items-center gap-1 overflow-x-auto rounded-full p-1.5">
           {TABS.map((tab) => (
             <button
               key={tab.id}
               onClick={() => setActiveTab(tab.id)}
               className={clsx(
-                'shrink-0 whitespace-nowrap rounded-md px-3 py-2 label-caps transition-colors duration-300 sm:px-5 sm:py-2.5',
+                'shrink-0 whitespace-nowrap rounded-full px-3 py-2 label-caps transition-colors duration-300 sm:px-5 sm:py-2.5',
                 activeTab === tab.id ? 'bg-blue text-paper' : 'text-ink-muted hover:text-ink',
               )}
             >

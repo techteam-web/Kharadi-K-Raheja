@@ -1,7 +1,6 @@
 import { useState } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 import { ChevronLeft, ChevronRight, Download } from 'lucide-react';
-import { MediaPlate } from '@/components/ui/MediaPlate';
 import { Button } from '@/components/ui/Button';
 import { BROCHURE_PAGES } from '@/data/misc';
 
@@ -26,27 +25,19 @@ export function BrochureViewer() {
             exit={{ rotateY: 100, opacity: 0.4 }}
             transition={{ duration: 0.65, ease: [0.22, 1, 0.36, 1] }}
             style={{ transformOrigin: 'left center' }}
-            className="absolute inset-0 overflow-hidden rounded-md border border-hairline shadow-[0_30px_60px_-15px_rgba(0,0,0,0.25)]"
+            className="absolute inset-0 overflow-hidden rounded-2xl border border-white/40 shadow-[0_30px_60px_-15px_rgba(0,0,0,0.25)]"
           >
-            <MediaPlate tone={index === 0 ? 'dark' : 'neutral'} grain={index === 0} className="h-full w-full">
+            <div className="relative h-full w-full">
+              <img src={page.image} alt={page.heading} className="absolute inset-0 h-full w-full object-cover" />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
               <div className="absolute inset-0 flex flex-col justify-end p-4 sm:p-9">
-                <span className={index === 0 ? 'label-caps text-paper/60' : 'label-caps text-ink-muted'}>
+                <span className="label-caps text-paper/60">
                   {String(index + 1).padStart(2, '0')} / {String(BROCHURE_PAGES.length).padStart(2, '0')}
                 </span>
-                <h2
-                  className={
-                    index === 0
-                      ? 'mt-1.5 font-display text-lg text-paper sm:mt-3 sm:text-4xl'
-                      : 'mt-1.5 font-display text-lg text-ink sm:mt-3 sm:text-3xl'
-                  }
-                >
-                  {page.heading}
-                </h2>
-                <p className={`mt-1.5 text-xs sm:mt-3 sm:text-base ${index === 0 ? 'text-paper/80' : 'text-ink-muted'}`}>
-                  {page.body}
-                </p>
+                <h2 className="mt-1.5 font-display text-lg text-paper sm:mt-3 sm:text-4xl">{page.heading}</h2>
+                <p className="mt-1.5 text-xs text-paper/80 sm:mt-3 sm:text-base">{page.body}</p>
               </div>
-            </MediaPlate>
+            </div>
           </motion.div>
         </AnimatePresence>
 
@@ -58,7 +49,7 @@ export function BrochureViewer() {
         <button
           onClick={() => go(-1)}
           disabled={isFirst}
-          className="flex h-9 w-9 items-center justify-center rounded-full border border-hairline text-ink-muted transition-colors duration-300 hover:text-ink disabled:opacity-30 sm:h-10 sm:w-10"
+          className="glass flex h-9 w-9 items-center justify-center rounded-full text-ink-muted transition-colors duration-300 hover:text-ink disabled:opacity-30 sm:h-10 sm:w-10"
         >
           <ChevronLeft size={16} />
         </button>
@@ -66,7 +57,7 @@ export function BrochureViewer() {
         <button
           onClick={() => go(1)}
           disabled={isLast}
-          className="flex h-9 w-9 items-center justify-center rounded-full border border-hairline text-ink-muted transition-colors duration-300 hover:text-ink disabled:opacity-30 sm:h-10 sm:w-10"
+          className="glass flex h-9 w-9 items-center justify-center rounded-full text-ink-muted transition-colors duration-300 hover:text-ink disabled:opacity-30 sm:h-10 sm:w-10"
         >
           <ChevronRight size={16} />
         </button>

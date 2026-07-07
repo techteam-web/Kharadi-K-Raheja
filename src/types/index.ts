@@ -78,7 +78,7 @@ export interface ProjectDetailItem {
   id: string;
   title: string;
   description: string;
-  tone: 'cool' | 'warm';
+  image: string;
 }
 
 export interface ProjectDetailCategory {
@@ -94,12 +94,35 @@ export interface PlanHotspot {
   y: number;
 }
 
-export type PlanId = 'master' | 'ground' | 'typical';
+export type PlanId = 'master' | 'ground' | 'typical' | 'floor-plate';
 
 export interface PlanView {
   id: PlanId;
   label: string;
+  image: string;
   hotspots: PlanHotspot[];
+}
+
+export type UnitStatus = 'available' | 'on-hold' | 'sold';
+
+export type UnitFacing = 'North-East' | 'North' | 'East' | 'South-East' | 'West' | 'North-West';
+
+export type UnitViewType = 'Cityscape view' | 'Garden view' | 'Avenue view' | 'Terrace view' | 'Skyline view';
+
+export interface Unit {
+  id: string;
+  unitNo: string;
+  tower: string;
+  floor: number;
+  floorLabel: string;
+  carpet: number;
+  saleable: number;
+  facing: UnitFacing;
+  view: UnitViewType;
+  status: UnitStatus;
+  ratePerSqft: number;
+  price: number;
+  highlights: string[];
 }
 
 export interface EsgSection {
@@ -107,10 +130,12 @@ export interface EsgSection {
   title: string[];
   body: string;
   metric: { value: string; label: string };
+  image: string;
 }
 
 export interface BrochurePage {
   id: string;
   heading: string;
   body: string;
+  image: string;
 }

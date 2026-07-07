@@ -16,7 +16,7 @@ export function PuneCards() {
         <motion.div
           key={project.id}
           variants={fadeUp}
-          className="group flex h-40 w-[70%] shrink-0 snap-start flex-col justify-between rounded-lg border border-hairline bg-surface p-5 transition-colors duration-300 hover:border-blue sm:w-[42%] sm:p-6 lg:h-44 lg:w-auto"
+          className="glass group flex h-40 w-[70%] shrink-0 snap-start flex-col justify-between rounded-2xl p-5 transition-shadow duration-300 hover:shadow-[0_12px_36px_rgba(0,84,166,0.2)] sm:w-[42%] sm:p-6 lg:h-44 lg:w-auto"
         >
           <div className="flex items-start justify-between">
             <span className="label-caps text-ink-muted">{project.type}</span>

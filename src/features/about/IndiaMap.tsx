@@ -12,7 +12,7 @@ export function IndiaMap() {
   return (
     <div className="relative aspect-[3/4] w-full max-w-[180px] mx-auto sm:max-w-[260px] lg:max-w-md">
       <div
-        className="absolute inset-0 bg-surface border border-hairline transition-colors duration-500"
+        className="glass-soft absolute inset-0 transition-colors duration-500"
         style={{ clipPath: SILHOUETTE_CLIP }}
       />
       <div
@@ -55,7 +55,7 @@ export function IndiaMap() {
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0, y: 4 }}
                   transition={{ duration: 0.25 }}
-                  className="absolute left-1/2 top-full z-10 mt-2 -translate-x-1/2 whitespace-nowrap rounded-md border border-hairline bg-paper px-3 py-2 shadow-[0_8px_24px_rgba(0,0,0,0.08)]"
+                  className="glass-strong absolute left-1/2 top-full z-10 mt-2 -translate-x-1/2 whitespace-nowrap rounded-xl px-3 py-2"
                 >
                   <div className="text-sm font-medium text-ink">{city.name}</div>
                   <div className="label-caps text-ink-muted mt-0.5">{city.projects} Projects</div>

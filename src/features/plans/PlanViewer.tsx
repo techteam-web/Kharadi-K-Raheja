@@ -1,7 +1,6 @@
 import { useRef, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Minus, Plus, MapPin } from 'lucide-react';
-import { MediaPlate } from '@/components/ui/MediaPlate';
 import type { PlanView } from '@/types';
 
 interface PlanViewerProps {
@@ -28,16 +27,9 @@ export function PlanViewer({ plan }: PlanViewerProps) {
         transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
         className="relative h-full w-full cursor-grab active:cursor-grabbing"
       >
-        <MediaPlate tone="neutral" grain={false} className="h-full w-full" label={plan.label}>
-          <div
-            className="absolute inset-0 opacity-30"
-            style={{
-              backgroundImage:
-                'linear-gradient(#00000022 1px, transparent 1px), linear-gradient(90deg, #00000022 1px, transparent 1px)',
-              backgroundSize: '5% 5%',
-            }}
-          />
-        </MediaPlate>
+        <div className="relative h-full w-full">
+          <img src={plan.image} alt={plan.label} className="h-full w-full object-contain" draggable={false} />
+        </div>
 
         {plan.hotspots.map((hotspot) => {
           const isActive = activeHotspot === hotspot.id;
@@ -67,7 +59,7 @@ export function PlanViewer({ plan }: PlanViewerProps) {
                     animate={{ opacity: 1, y: 0, scale: 1 }}
                     exit={{ opacity: 0, y: 4, scale: 0.96 }}
                     transition={{ duration: 0.2 }}
-                    className="absolute left-1/2 top-full z-10 mt-2 -translate-x-1/2 whitespace-nowrap rounded-md border border-hairline bg-paper px-3 py-1.5 shadow-lg"
+                    className="glass-strong absolute left-1/2 top-full z-10 mt-2 -translate-x-1/2 whitespace-nowrap rounded-xl px-3 py-1.5"
                   >
                     <span className="text-sm font-medium text-ink">{hotspot.label}</span>
                   </motion.div>
@@ -78,10 +70,10 @@ export function PlanViewer({ plan }: PlanViewerProps) {
         })}
       </motion.div>
 
-      <div className="absolute bottom-4 right-4 flex flex-col overflow-hidden rounded-md border border-hairline bg-paper sm:bottom-8 sm:right-8">
+      <div className="glass-strong absolute bottom-4 right-4 flex flex-col overflow-hidden rounded-2xl sm:bottom-8 sm:right-8">
         <button
           onClick={() => setZoom((z) => Math.min(MAX_ZOOM, z + 0.4))}
-          className="flex h-10 w-10 items-center justify-center text-ink-muted transition-colors hover:text-ink border-b border-hairline"
+          className="flex h-10 w-10 items-center justify-center text-ink-muted transition-colors hover:text-ink border-b border-white/25"
         >
           <Plus size={15} />
         </button>

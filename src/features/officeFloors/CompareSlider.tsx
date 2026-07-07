@@ -1,7 +1,8 @@
 import { useRef, useState } from 'react';
 import { motion } from 'framer-motion';
 import { GripVertical } from 'lucide-react';
-import { MediaPlate } from '@/components/ui/MediaPlate';
+import shellAndCoreImage from '@/assets/images/Shell-and-core.webp';
+import furnishedImage from '@/assets/images/Furnished.webp';
 
 export function CompareSlider() {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -25,14 +26,24 @@ export function CompareSlider() {
       onPointerDown={(e) => updateFromClientX(e.clientX)}
     >
       {/* Vacant (base layer) */}
-      <MediaPlate tone="neutral" grain={false} className="absolute inset-0 h-full w-full" label="Vacant Space" />
+      <img
+        src={shellAndCoreImage}
+        alt="Vacant shell-and-core office floor"
+        className="absolute inset-0 h-full w-full object-cover"
+        draggable={false}
+      />
 
-      {/* Furnished (clipped overlay) — clip-path animates every drag frame, so no blend-mode grain here */}
+      {/* Furnished (clipped overlay) — clip-path animates every drag frame */}
       <div
         className="absolute inset-0 h-full w-full"
         style={{ clipPath: `inset(0 ${100 - position}% 0 0)`, willChange: 'clip-path' }}
       >
-        <MediaPlate tone="warm" grain={false} className="h-full w-full" label="Furnished Space" />
+        <img
+          src={furnishedImage}
+          alt="Furnished, move-in-ready office floor"
+          className="h-full w-full object-cover"
+          draggable={false}
+        />
       </div>
 
       {/* Divider handle */}
@@ -40,8 +51,8 @@ export function CompareSlider() {
         className="pointer-events-none absolute top-0 h-full"
         style={{ left: `${position}%` }}
       >
-        <div className="h-full w-px bg-paper" />
-        <div className="absolute top-1/2 left-1/2 flex h-11 w-11 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full bg-paper shadow-[0_4px_16px_rgba(0,0,0,0.2)]">
+        <div className="h-full w-px bg-white/70" />
+        <div className="glass-strong absolute top-1/2 left-1/2 flex h-11 w-11 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full">
           <GripVertical size={16} className="text-ink" />
         </div>
       </motion.div>

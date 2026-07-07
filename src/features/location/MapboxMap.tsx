@@ -39,9 +39,9 @@ function buildMarkerElement(point: LocationPoi, color: string, isActive: boolean
   el.className = 'group flex flex-col items-center gap-1.5';
   el.innerHTML = `
     <span
-      class="rounded-md border bg-paper px-3 py-1.5 whitespace-nowrap transition-all duration-300"
-      style="border-color:${isActive ? color : '#e8e8e8'}; box-shadow:${
-        isActive ? `0 6px 20px ${color}33` : '0 2px 8px rgba(0,0,0,0.08)'
+      class="glass rounded-full px-3.5 py-1.5 whitespace-nowrap transition-all duration-300"
+      style="border-color:${isActive ? `${color}88` : 'rgba(255,255,255,0.65)'}; box-shadow:${
+        isActive ? `0 6px 20px ${color}40` : '0 8px 32px rgba(17,17,17,0.08)'
       }"
     >
       <span class="block text-[0.8rem] font-medium text-ink">${point.name}</span>
@@ -49,7 +49,7 @@ function buildMarkerElement(point: LocationPoi, color: string, isActive: boolean
         point.time ? ` · ${point.time}` : ''
       }</span>
     </span>
-    <span class="h-3 w-3 rounded-full border-2 border-paper shadow" style="background-color:${color}"></span>
+    <span class="h-3 w-3 rounded-full border-2 border-white/80 shadow" style="background-color:${color}"></span>
   `;
   el.addEventListener('click', onClick);
   return el;
@@ -59,10 +59,10 @@ function buildSiteElement() {
   const el = document.createElement('div');
   el.className = 'flex flex-col items-center gap-1.5';
   el.innerHTML = `
-    <span class="rounded-md border border-hairline bg-paper px-3 py-1.5 shadow-md whitespace-nowrap">
+    <span class="glass rounded-full px-3.5 py-1.5 whitespace-nowrap">
       <span class="label-caps text-ink">Kharadi 57</span>
     </span>
-    <span class="h-3.5 w-3.5 rounded-full border-2 border-paper bg-blue shadow"></span>
+    <span class="h-3.5 w-3.5 rounded-full border-2 border-white/80 bg-blue shadow"></span>
   `;
   return el;
 }

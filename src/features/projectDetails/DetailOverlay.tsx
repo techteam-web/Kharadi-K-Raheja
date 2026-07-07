@@ -1,6 +1,5 @@
 import { motion } from 'framer-motion';
 import { X } from 'lucide-react';
-import { MediaPlate } from '@/components/ui/MediaPlate';
 import type { ProjectDetailItem } from '@/types';
 
 interface DetailOverlayProps {
@@ -21,9 +20,13 @@ export function DetailOverlay({ item, onClose }: DetailOverlayProps) {
       <motion.div
         layoutId={`card-${item.id}`}
         onClick={(e) => e.stopPropagation()}
-        className="relative flex h-full w-full max-w-6xl flex-col overflow-y-auto rounded-lg bg-paper lg:grid lg:grid-cols-2 lg:overflow-hidden"
+        className="glass-strong relative flex h-full w-full max-w-6xl flex-col overflow-y-auto rounded-3xl lg:grid lg:grid-cols-2 lg:overflow-hidden"
       >
-        <MediaPlate tone={item.tone === 'warm' ? 'warm' : 'cool'} className="h-40 w-full shrink-0 sm:h-56 lg:h-full" />
+        <img
+          src={item.image}
+          alt={item.title}
+          className="h-40 w-full shrink-0 object-cover sm:h-56 lg:h-full"
+        />
         <div className="flex flex-1 flex-col justify-center p-6 sm:p-10 lg:p-14">
           <span className="label-caps text-blue">Project Details</span>
           <h2 className="mt-3 font-display text-2xl leading-tight text-ink text-balance sm:mt-4 sm:text-3xl lg:mt-5 lg:text-4xl">
@@ -36,7 +39,7 @@ export function DetailOverlay({ item, onClose }: DetailOverlayProps) {
 
         <button
           onClick={onClose}
-          className="absolute right-4 top-4 flex h-9 w-9 items-center justify-center rounded-full border border-hairline bg-paper text-ink transition-colors duration-300 hover:border-ink sm:right-6 sm:top-6 sm:h-10 sm:w-10"
+          className="glass absolute right-4 top-4 flex h-9 w-9 items-center justify-center rounded-full text-ink transition-colors duration-300 hover:bg-white/70 sm:right-6 sm:top-6 sm:h-10 sm:w-10"
         >
           <X size={16} />
         </button>

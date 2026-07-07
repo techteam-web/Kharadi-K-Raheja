@@ -4,7 +4,7 @@ import { ESG_SECTIONS } from '@/data/misc';
 
 export default function EsgPage() {
   return (
-    <div className="px-4 py-10 sm:px-8 sm:py-14 lg:px-20 lg:py-20">
+    <div className="px-4 py-10 sm:px-8 sm:py-14 lg:py-20 lg:pl-20 lg:pr-28 xl:pr-32">
       <PageHeader
         eyebrow="ESG"
         title="Built with planet consciousness."

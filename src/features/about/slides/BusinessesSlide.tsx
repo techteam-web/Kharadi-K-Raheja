@@ -26,11 +26,11 @@ export function BusinessesSlide() {
           <motion.div
             key={vertical.id}
             variants={fadeUp}
-            className="flex w-[78%] shrink-0 snap-start flex-col rounded-lg border border-hairline bg-surface p-4 sm:w-[45%] sm:p-6 lg:h-72 lg:w-auto"
+            className="glass flex w-[78%] shrink-0 snap-start flex-col rounded-2xl p-4 sm:w-[45%] sm:p-6 lg:h-72 lg:w-auto"
           >
             <div className="font-display text-lg text-ink lg:text-xl">{vertical.title}</div>
             <p className="mt-2 text-sm leading-relaxed text-ink-muted lg:mt-3 lg:flex-1">{vertical.description}</p>
-            <div className="mt-3 flex flex-wrap gap-x-2 gap-y-1 border-t border-hairline pt-3 lg:mt-4 lg:pt-4">
+            <div className="mt-3 flex flex-wrap gap-x-2 gap-y-1 border-t border-white/25 pt-3 lg:mt-4 lg:pt-4">
               {vertical.brands.map((brand) => (
                 <span key={brand} className="label-caps text-ink-muted">
                   {brand}

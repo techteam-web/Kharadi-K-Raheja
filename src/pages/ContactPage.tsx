@@ -18,7 +18,7 @@ const CONTACT_ROWS = [
 export default function ContactPage() {
   return (
     <div className="grid min-h-full grid-cols-1 lg:h-full lg:grid-cols-2">
-      <div className="flex flex-col justify-center px-4 py-10 sm:px-8 sm:py-14 lg:px-20 lg:py-20">
+      <div className="flex flex-col justify-center px-4 py-10 sm:px-8 sm:py-14 lg:py-20 lg:pl-20 lg:pr-24">
         <PageHeader eyebrow="Contact" title="Get in Touch" />
 
         <motion.div
@@ -29,7 +29,7 @@ export default function ContactPage() {
         >
           {CONTACT_ROWS.map((row) => (
             <motion.div key={row.label} variants={fadeUp} className="flex items-center gap-4 py-4 sm:gap-5 sm:py-5">
-              <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full border border-hairline text-blue sm:h-10 sm:w-10">
+              <span className="glass flex h-9 w-9 shrink-0 items-center justify-center rounded-full text-blue sm:h-10 sm:w-10">
                 <row.icon size={16} strokeWidth={1.6} />
               </span>
               <div>
@@ -46,7 +46,7 @@ export default function ContactPage() {
           animate="visible"
           className="mt-8 flex items-center gap-6 sm:mt-12 sm:gap-8"
         >
-          <div className="flex h-20 w-20 shrink-0 items-center justify-center rounded-lg border border-hairline bg-surface sm:h-28 sm:w-28">
+          <div className="glass-soft flex h-20 w-20 shrink-0 items-center justify-center rounded-2xl sm:h-28 sm:w-28">
             <div
               className="h-14 w-14 opacity-80 sm:h-20 sm:w-20"
               style={{

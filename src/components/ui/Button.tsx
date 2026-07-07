@@ -15,11 +15,11 @@ interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
 
 const VARIANT_CLASSES: Record<ButtonVariant, string> = {
   primary:
-    'bg-blue text-paper hover:bg-blue-deep',
+    'bg-blue text-paper shadow-[0_8px_24px_rgba(0,84,166,0.35),inset_0_1px_0_rgba(255,255,255,0.25)] hover:bg-blue-deep',
   accent:
-    'bg-green text-paper hover:bg-green-deep',
+    'bg-green text-paper shadow-[0_8px_24px_rgba(0,166,81,0.35),inset_0_1px_0_rgba(255,255,255,0.25)] hover:bg-green-deep',
   secondary:
-    'bg-transparent text-ink border border-hairline hover:border-ink',
+    'glass text-ink hover:bg-white/70',
   ghost:
     'bg-transparent text-ink-muted hover:text-ink',
 };
@@ -32,7 +32,7 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
       <button
         ref={ref}
         className={clsx(
-          'group inline-flex items-center gap-2.5 px-7 py-3.5 rounded-md',
+          'group inline-flex items-center gap-2.5 px-7 py-3.5 rounded-full',
           'label-caps transition-colors duration-300',
           VARIANT_CLASSES[variant],
           className,

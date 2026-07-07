@@ -16,9 +16,17 @@
   --color-green-deep: #00783b;
   --color-green-tint: #e8f7ee;
 
+  /* ---- Glass surfaces ---- */
+  --color-glass: rgba(255, 255, 255, 0.55);
+  --color-glass-strong: rgba(255, 255, 255, 0.7);
+  --color-glass-soft: rgba(255, 255, 255, 0.32);
+  --color-glass-border: rgba(255, 255, 255, 0.65);
+  --color-glass-dark: rgba(17, 17, 17, 0.42);
+  --color-glass-dark-border: rgba(255, 255, 255, 0.16);
+
   /* ---- Type ---- */
-  --font-display: 'Playfair Display', 'Georgia', serif;
-  --font-body: 'Inter', 'Segoe UI', sans-serif;
+  --font-display: 'Montserrat', 'Segoe UI', sans-serif;
+  --font-body: 'Montserrat', 'Segoe UI', sans-serif;
 
   /* ---- Radius ---- */
   --radius-none: 0px;
@@ -43,18 +51,72 @@
     color-scheme: light;
   }
 
+  /* ---- Dark mode ----
+     Swaps the semantic surface/text/glass variables; --color-paper stays fixed
+     white since it's used for "white text/icon on photo or solid button", not
+     page background, in every consuming component. */
+  html[data-theme='dark'] {
+    color-scheme: dark;
+
+    --color-ink: #f2f3f5;
+    --color-ink-muted: #9ba0a8;
+    --color-hairline: rgba(255, 255, 255, 0.1);
+    --color-surface: #16171c;
+
+    --color-blue-tint: rgba(0, 84, 166, 0.18);
+    --color-green-tint: rgba(0, 166, 81, 0.16);
+
+    --color-glass: rgba(30, 32, 38, 0.55);
+    --color-glass-strong: rgba(24, 26, 31, 0.72);
+    --color-glass-soft: rgba(36, 38, 45, 0.4);
+    --color-glass-border: rgba(255, 255, 255, 0.12);
+    --color-glass-dark: rgba(6, 7, 9, 0.6);
+    --color-glass-dark-border: rgba(255, 255, 255, 0.14);
+  }
+
   body {
     margin: 0;
     font-family: var(--font-body);
     color: var(--color-ink);
-    background: var(--color-paper);
+    background: #f7f8f8;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     text-rendering: optimizeLegibility;
     overflow: hidden;
   }
 
+  /* Ambient gradient mesh — the colored backdrop every glass surface blurs against */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    background:
+      radial-gradient(1100px 760px at 6% -8%, rgba(0, 84, 166, 0.16), transparent 60%),
+      radial-gradient(900px 680px at 102% 6%, rgba(0, 166, 81, 0.14), transparent 58%),
+      radial-gradient(820px 820px at 18% 104%, rgba(0, 84, 166, 0.1), transparent 60%),
+      radial-gradient(760px 760px at 88% 96%, rgba(0, 166, 81, 0.12), transparent 58%),
+      #f7f8f8;
+    transition: background-color 0.4s ease;
+  }
+
+  html[data-theme='dark'] body {
+    background: #0a0b0e;
+  }
+
+  html[data-theme='dark'] body::before {
+    background:
+      radial-gradient(1100px 760px at 6% -8%, rgba(0, 84, 166, 0.32), transparent 60%),
+      radial-gradient(900px 680px at 102% 6%, rgba(0, 166, 81, 0.24), transparent 58%),
+      radial-gradient(820px 820px at 18% 104%, rgba(0, 84, 166, 0.18), transparent 60%),
+      radial-gradient(760px 760px at 88% 96%, rgba(0, 166, 81, 0.2), transparent 58%),
+      #0a0b0e;
+  }
+
   #root {
+    position: relative;
+    z-index: 1;
     width: 100%;
     height: 100svh;
   }
@@ -108,5 +170,43 @@
 
   .text-balance {
     text-wrap: balance;
+  }
+
+  /* ---- Glassmorphism surfaces ---- */
+  .glass {
+    background: var(--color-glass);
+    backdrop-filter: blur(20px) saturate(160%);
+    -webkit-backdrop-filter: blur(20px) saturate(160%);
+    border: 1px solid var(--color-glass-border);
+    box-shadow:
+      0 8px 32px rgba(17, 17, 17, 0.08),
+      inset 0 1px 0 rgba(255, 255, 255, 0.5);
+  }
+
+  .glass-strong {
+    background: var(--color-glass-strong);
+    backdrop-filter: blur(28px) saturate(170%);
+    -webkit-backdrop-filter: blur(28px) saturate(170%);
+    border: 1px solid var(--color-glass-border);
+    box-shadow:
+      0 20px 60px rgba(17, 17, 17, 0.12),
+      inset 0 1px 0 rgba(255, 255, 255, 0.6);
+  }
+
+  .glass-soft {
+    background: var(--color-glass-soft);
+    backdrop-filter: blur(14px) saturate(150%);
+    -webkit-backdrop-filter: blur(14px) saturate(150%);
+    border: 1px solid rgba(255, 255, 255, 0.45);
+  }
+
+  .glass-dark {
+    background: var(--color-glass-dark);
+    backdrop-filter: blur(20px) saturate(160%);
+    -webkit-backdrop-filter: blur(20px) saturate(160%);
+    border: 1px solid var(--color-glass-dark-border);
+    box-shadow:
+      0 8px 32px rgba(0, 0, 0, 0.25),
+      inset 0 1px 0 rgba(255, 255, 255, 0.08);
   }
 }

@@ -10,7 +10,7 @@ const STATS = [
 
 export function IntroSection() {
   return (
-    <section className="relative w-full border-t border-hairline bg-paper px-6 py-16 sm:px-10 sm:py-20 lg:px-20 lg:py-28">
+    <section className="relative w-full border-t border-ink/8 px-6 py-16 sm:px-10 sm:py-20 lg:py-28 lg:pl-20 lg:pr-28 xl:pr-32">
       <motion.div
         variants={staggerChildren(0.12)}
         initial="hidden"
@@ -40,7 +40,7 @@ export function IntroSection() {
         initial="hidden"
         whileInView="visible"
         viewport={{ once: true }}
-        className="mt-12 grid grid-cols-1 gap-6 border-t border-hairline pt-10 sm:grid-cols-3 sm:gap-10 lg:mt-20"
+        className="mt-12 grid grid-cols-1 gap-6 border-t border-ink/8 pt-10 sm:grid-cols-3 sm:gap-10 lg:mt-20"
       >
         {STATS.map((stat) => (
           <motion.div key={stat.label} variants={fadeUp}>

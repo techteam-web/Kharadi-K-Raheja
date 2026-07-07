@@ -13,8 +13,8 @@ export function PoiList() {
   const color = ACCENT_HEX[category.accent];
 
   return (
-    <div className="flex w-full flex-col rounded-lg border border-hairline bg-paper shadow-sm lg:w-[340px]">
-      <div className="border-b border-hairline px-4 py-3 sm:px-6 sm:py-5">
+    <div className="glass-strong flex w-full flex-col rounded-3xl lg:w-[340px]">
+      <div className="border-b border-white/25 px-4 py-3 sm:px-6 sm:py-5">
         <div className="label-caps" style={{ color }}>
           {category.label}
         </div>
