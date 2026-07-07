@@ -1,9 +1,9 @@
 import { motion } from 'framer-motion';
 import { Check } from 'lucide-react';
 import { SectionLabel } from '@/components/ui/SectionLabel';
-import { MediaPlate } from '@/components/ui/MediaPlate';
 import { COMMERCIAL_FEATURES } from '@/data/about';
 import { fadeUp, staggerChildren } from '@/animations/motion';
+import commercialImage from '@/assets/images/about-commercial-workplace.jpg';
 
 export function CommercialSlide() {
   return (
@@ -39,7 +39,11 @@ export function CommercialSlide() {
       </div>
 
       <motion.div variants={fadeUp} className="hidden lg:block">
-        <MediaPlate tone="cool" className="aspect-[4/5] w-full rounded-lg" />
+        <img
+          src={commercialImage}
+          alt="Business professionals in a modern commercial office lobby"
+          className="aspect-[4/5] w-full rounded-lg object-cover"
+        />
       </motion.div>
     </motion.div>
   );

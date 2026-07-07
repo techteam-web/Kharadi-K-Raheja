@@ -1,8 +1,8 @@
 import { motion } from 'framer-motion';
 import { SectionLabel } from '@/components/ui/SectionLabel';
-import { MediaPlate } from '@/components/ui/MediaPlate';
 import { COMPANY_STATS } from '@/data/about';
 import { fadeUp, staggerChildren } from '@/animations/motion';
+import overviewImage from '@/assets/images/about-corporate-overview.jpg';
 
 export function OverviewSlide() {
   return (
@@ -46,7 +46,11 @@ export function OverviewSlide() {
       </div>
 
       <motion.div variants={fadeUp} className="hidden lg:block">
-        <MediaPlate tone="dark" className="aspect-[4/5] w-full rounded-lg" />
+        <img
+          src={overviewImage}
+          alt="K Raheja Corp — modern glass office building exterior"
+          className="aspect-[4/5] w-full rounded-lg object-cover"
+        />
       </motion.div>
     </motion.div>
   );

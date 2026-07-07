@@ -1,5 +1,4 @@
 import { motion } from 'framer-motion';
-import { MediaPlate } from '@/components/ui/MediaPlate';
 import { fadeUp, staggerChildren } from '@/animations/motion';
 import type { EsgSection } from '@/types';
 
@@ -19,7 +18,11 @@ export function EsgStory({ section, index, reverse }: EsgStoryProps) {
       className="grid grid-cols-1 items-center gap-8 border-t border-hairline py-10 sm:gap-10 sm:py-14 lg:grid-cols-2 lg:gap-16 lg:py-20"
     >
       <div className={reverse ? 'lg:order-2' : 'lg:order-1'}>
-        <MediaPlate tone="green" className="aspect-[16/9] w-full rounded-lg sm:aspect-[4/5]" />
+        <img
+          src={section.image}
+          alt={section.title.join(' ')}
+          className="aspect-[16/9] w-full rounded-lg object-cover sm:aspect-[4/5]"
+        />
       </div>
       <div className={reverse ? 'lg:order-1' : 'lg:order-2'}>
         <motion.span variants={fadeUp} className="label-caps text-green">
