@@ -37,9 +37,8 @@ export interface PortfolioCity {
   id: string;
   name: string;
   projects: number;
-  /** Position as a percentage within the India map bounding box */
-  x: number;
-  y: number;
+  lat: number;
+  lng: number;
 }
 
 export interface PortfolioStat {

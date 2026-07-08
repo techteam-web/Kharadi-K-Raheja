@@ -10,16 +10,18 @@ import type {
 // Company facts below are cross-checked against krahejacorp.com, Wikipedia, Mindspace Business
 // Parks REIT's own portfolio disclosure, and Chalet Hotels' investor materials — not invented figures.
 
+// Real city-center coordinates (verified via OpenStreetMap/Nominatim), matching the
+// verification standard already used for src/data/location.ts.
 export const PAN_INDIA_CITIES: PortfolioCity[] = [
-  { id: 'delhi-ncr', name: 'Delhi NCR', projects: 6, x: 31.7, y: 23.7 },
-  { id: 'mumbai', name: 'Mumbai', projects: 16, x: 16.8, y: 59 },
-  { id: 'navi-mumbai', name: 'Navi Mumbai', projects: 4, x: 19, y: 60.5 },
-  { id: 'vadodara', name: 'Vadodara', projects: 3, x: 17.9, y: 47 },
-  { id: 'goa', name: 'Goa', projects: 2, x: 20.1, y: 72.3 },
-  { id: 'pune', name: 'Pune', projects: 12, x: 20.2, y: 61 },
-  { id: 'hyderabad', name: 'Hyderabad', projects: 7, x: 36.2, y: 65.3 },
-  { id: 'bangalore', name: 'Bengaluru', projects: 5, x: 33.1, y: 81.6 },
-  { id: 'chennai', name: 'Chennai', projects: 3, x: 42.3, y: 81.2 },
+  { id: 'delhi-ncr', name: 'Delhi NCR', projects: 6, lat: 28.6139, lng: 77.209 },
+  { id: 'mumbai', name: 'Mumbai', projects: 16, lat: 19.076, lng: 72.8777 },
+  { id: 'navi-mumbai', name: 'Navi Mumbai', projects: 4, lat: 19.033, lng: 73.0297 },
+  { id: 'vadodara', name: 'Vadodara', projects: 3, lat: 22.3072, lng: 73.1812 },
+  { id: 'goa', name: 'Goa', projects: 2, lat: 15.4909, lng: 73.8278 },
+  { id: 'pune', name: 'Pune', projects: 12, lat: 18.5204, lng: 73.8567 },
+  { id: 'hyderabad', name: 'Hyderabad', projects: 7, lat: 17.385, lng: 78.4867 },
+  { id: 'bangalore', name: 'Bengaluru', projects: 5, lat: 12.9716, lng: 77.5946 },
+  { id: 'chennai', name: 'Chennai', projects: 3, lat: 13.0827, lng: 80.2707 },
 ];
 
 export const COMPANY_STATS: PortfolioStat[] = [
