@@ -1,8 +1,10 @@
 import { forwardRef } from 'react';
 import type { ButtonHTMLAttributes, ReactNode } from 'react';
 import clsx from 'clsx';
+import gsap from 'gsap';
 import type { LucideIcon } from 'lucide-react';
 import { ArrowRight } from 'lucide-react';
+import { useMagneticHover } from '@/animations/useMagneticHover';
 
 type ButtonVariant = 'primary' | 'accent' | 'secondary' | 'ghost';
 
@@ -26,12 +28,29 @@ const VARIANT_CLASSES: Record<ButtonVariant, string> = {
 };
 
 export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
-  ({ variant = 'primary', icon: Icon, iconClassName, hideDefaultIcon, className, children, ...props }, ref) => {
+  ({ variant = 'primary', icon: Icon, iconClassName, hideDefaultIcon, className, children, onMouseDown, onMouseUp, onMouseLeave, ...props }, ref) => {
     const ShownIcon = Icon ?? (variant !== 'ghost' && !hideDefaultIcon ? ArrowRight : undefined);
+    const magneticRef = useMagneticHover<HTMLButtonElement>({ strength: 0.25, scale: 1.04 });
 
     return (
       <button
-        ref={ref}
+        ref={(node) => {
+          magneticRef.current = node;
+          if (typeof ref === 'function') ref(node);
+          else if (ref) ref.current = node;
+        }}
+        onMouseDown={(e) => {
+          gsap.to(e.currentTarget, { scale: 0.96, duration: 0.15, ease: 'power2.out' });
+          onMouseDown?.(e);
+        }}
+        onMouseUp={(e) => {
+          gsap.to(e.currentTarget, { scale: 1.04, duration: 0.3, ease: 'back.out(2)' });
+          onMouseUp?.(e);
+        }}
+        onMouseLeave={(e) => {
+          gsap.to(e.currentTarget, { scale: 1, duration: 0.3, ease: 'power3.out' });
+          onMouseLeave?.(e);
+        }}
         className={clsx(
           'group inline-flex items-center gap-2.5 px-7 py-3.5 rounded-full',
           'label-caps transition-colors duration-300',

@@ -1,5 +1,6 @@
 import { motion } from 'framer-motion';
 import { SectionLabel } from '@/components/ui/SectionLabel';
+import { AnimatedCounter } from '@/components/ui/AnimatedCounter';
 import { fadeUp, staggerChildren } from '@/animations/motion';
 
 const STATS = [
@@ -44,7 +45,9 @@ export function IntroSection() {
       >
         {STATS.map((stat) => (
           <motion.div key={stat.label} variants={fadeUp}>
-            <div className="font-display text-4xl text-ink lg:text-5xl">{stat.value}</div>
+            <div className="font-display text-4xl text-ink lg:text-5xl">
+              <AnimatedCounter value={stat.value} />
+            </div>
             <div className="mt-3 label-caps text-ink-muted">{stat.label}</div>
           </motion.div>
         ))}

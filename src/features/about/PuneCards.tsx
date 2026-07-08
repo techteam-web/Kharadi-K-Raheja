@@ -10,7 +10,7 @@ export function PuneCards() {
       initial="hidden"
       whileInView="visible"
       viewport={{ once: true, margin: '-80px' }}
-      className="flex snap-x gap-4 overflow-x-auto pb-2 sm:gap-5 lg:grid lg:grid-cols-4 lg:overflow-visible lg:pb-0"
+      className="scroll-fade-x flex snap-x gap-4 overflow-x-auto pb-2 sm:gap-5 lg:grid lg:grid-cols-4 lg:overflow-visible lg:pb-0"
     >
       {PUNE_PORTFOLIO.map((project) => (
         <motion.div

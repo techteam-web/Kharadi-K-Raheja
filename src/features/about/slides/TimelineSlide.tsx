@@ -23,7 +23,7 @@ export function TimelineSlide() {
 
       <motion.div
         variants={staggerChildren(0.06)}
-        className="relative mt-6 flex gap-8 overflow-x-auto pb-2 sm:gap-10 lg:mt-20 lg:justify-between lg:gap-0 lg:overflow-visible lg:pb-0"
+        className="scroll-fade-x relative mt-6 flex gap-8 overflow-x-auto pb-2 sm:gap-10 lg:mt-20 lg:justify-between lg:gap-0 lg:overflow-visible lg:pb-0"
       >
         <div className="absolute left-0 right-0 top-2 hidden h-px bg-hairline lg:block" />
         {TIMELINE.map((milestone) => (

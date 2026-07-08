@@ -1,41 +1,35 @@
 import { useRef } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
-import { ChevronDown } from 'lucide-react';
-import { Button } from '@/components/ui/Button';
 import { fadeUp, staggerChildren } from '@/animations/motion';
-import heroImage from '@/assets/images/hero.webp';
+import { OrbitViewer } from '@/features/panorama/OrbitViewer';
+import kRahejaLogo from '@/assets/k-raheja-logo.svg';
 
-interface HeroSectionProps {
-  onExplore: () => void;
-  onViewLocation: () => void;
-  onDownload: () => void;
-}
-
-export function HeroSection({ onExplore, onViewLocation, onDownload }: HeroSectionProps) {
+export function HeroSection() {
   const ref = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({ target: ref, offset: ['start start', 'end start'] });
 
-  const imageY = useTransform(scrollYProgress, [0, 1], ['0%', '18%']);
   const contentOpacity = useTransform(scrollYProgress, [0, 0.6], [1, 0]);
   const contentY = useTransform(scrollYProgress, [0, 0.6], ['0%', '-6%']);
 
   return (
     <section ref={ref} className="relative h-full w-full overflow-hidden">
-      <motion.div style={{ y: imageY, willChange: 'transform' }} className="absolute inset-0 h-[120%] w-full">
-        <img
-          src={heroImage}
-          alt="Kharadi 57 — The Square, twin commercial towers at dusk"
-          className="h-full w-full object-cover"
-        />
-      </motion.div>
+      <div className="absolute inset-0 h-full w-full">
+        <OrbitViewer framePath="/orbit-frames" frameCount={72} autoRotate />
+      </div>
 
-      {/* Wash + vignette for text legibility over a bright architectural render */}
-      <div className="absolute inset-0 bg-black/25" />
-      <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/30 to-black/10" />
+      {/* Scrim behind the text only — pointer-events-none so drag reaches the orbit viewer beneath */}
+      <div className="pointer-events-none absolute inset-x-0 bottom-0 h-[60%] bg-gradient-to-t from-black/90 via-black/50 to-transparent" />
+
+      <motion.div
+        style={{ opacity: contentOpacity }}
+        className="pointer-events-none absolute top-6 left-6 z-10 sm:top-8 sm:left-10 lg:top-10 lg:left-20"
+      >
+        <img src={kRahejaLogo} alt="K Raheja Corp" className="h-10 w-auto sm:h-12 lg:h-14" />
+      </motion.div>
 
       <motion.div
         style={{ opacity: contentOpacity, y: contentY }}
-        className="relative z-10 flex h-full w-full flex-col justify-end px-6 pb-16 sm:px-10 lg:px-20 lg:pb-24"
+        className="pointer-events-none relative z-10 flex h-full w-full flex-col justify-end px-6 pb-16 sm:px-10 lg:px-20 lg:pb-24"
       >
         <motion.div variants={staggerChildren(0.12)} initial="hidden" animate="visible">
           <motion.p variants={fadeUp} className="label-caps text-paper/70">
@@ -53,36 +47,8 @@ export function HeroSection({ onExplore, onViewLocation, onDownload }: HeroSecti
           >
             Built for Tomorrow. Designed for Business.
           </motion.p>
-
-          <motion.div variants={fadeUp} className="mt-8 flex flex-wrap items-center gap-3 sm:mt-11 sm:gap-4">
-            <Button variant="primary" onClick={onExplore}>
-              Explore Experience
-            </Button>
-            <Button variant="secondary" onClick={onViewLocation} className="glass-dark !text-paper hover:!bg-white/10">
-              View Location
-            </Button>
-            <Button variant="accent" onClick={onDownload}>
-              Download Brochure
-            </Button>
-          </motion.div>
         </motion.div>
       </motion.div>
-
-      <motion.button
-        onClick={onExplore}
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 1, duration: 0.8 }}
-        className="absolute bottom-9 left-6 z-10 hidden items-center gap-2 label-caps text-paper/60 hover:text-paper transition-colors duration-300 sm:left-10 md:flex lg:left-20"
-      >
-        Scroll to Explore
-        <motion.span
-          animate={{ y: [0, 4, 0] }}
-          transition={{ duration: 1.8, repeat: Infinity, ease: 'easeInOut' }}
-        >
-          <ChevronDown size={14} />
-        </motion.span>
-      </motion.button>
     </section>
   );
 }

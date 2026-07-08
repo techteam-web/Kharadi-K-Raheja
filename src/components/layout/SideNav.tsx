@@ -6,7 +6,9 @@ import clsx from 'clsx';
 import { NAV_ITEMS } from '@/data/navigation';
 import { useNavigationStore } from '@/stores/useNavigationStore';
 import { useThemeStore } from '@/stores/useThemeStore';
+import { useMagneticHover } from '@/animations/useMagneticHover';
 import kRahejaLogo from '@/assets/k-raheja-logo.svg';
+import type { NavItem } from '@/types';
 
 function useActiveNavItem() {
   const location = useLocation();
@@ -14,6 +16,43 @@ function useActiveNavItem() {
     NAV_ITEMS.find((item) =>
       item.path === '/' ? location.pathname === '/' : location.pathname.startsWith(item.path),
     ) ?? NAV_ITEMS[0]
+  );
+}
+
+/** Desktop rail item — a subtle macOS-dock-style magnetic pull on hover. */
+function SideNavItem({ item }: { item: NavItem }) {
+  const magneticRef = useMagneticHover<HTMLAnchorElement>({ strength: 0.35, scale: 1.14 });
+
+  return (
+    <NavLink
+      ref={magneticRef}
+      to={item.path}
+      end={item.path === '/'}
+      className="group relative flex h-11 w-11 items-center justify-center outline-none"
+    >
+      {({ isActive }) => (
+        <>
+          {isActive && (
+            <motion.span
+              layoutId="side-nav-active-pill"
+              transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
+              className="absolute inset-0 rounded-full bg-blue shadow-[0_4px_18px_rgba(0,84,166,0.5)]"
+            />
+          )}
+          <item.icon
+            size={17}
+            strokeWidth={1.7}
+            className={clsx(
+              'relative z-10 transition-colors duration-300',
+              isActive ? 'text-paper' : 'text-ink-muted group-hover:text-ink',
+            )}
+          />
+          <span className="glass-strong pointer-events-none absolute right-full mr-2 whitespace-nowrap rounded-full px-3.5 py-1.5 label-caps text-ink opacity-0 shadow-lg transition-all duration-300 group-hover:mr-3.5 group-hover:opacity-100">
+            {item.label}
+          </span>
+        </>
+      )}
+    </NavLink>
   );
 }
 
@@ -53,35 +92,7 @@ export function SideNav() {
         <div className="my-0.5 h-px w-7 bg-ink/10" />
 
         {NAV_ITEMS.map((item) => (
-          <NavLink
-            key={item.id}
-            to={item.path}
-            end={item.path === '/'}
-            className="group relative flex h-11 w-11 items-center justify-center outline-none"
-          >
-            {({ isActive }) => (
-              <>
-                {isActive && (
-                  <motion.span
-                    layoutId="side-nav-active-pill"
-                    transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
-                    className="absolute inset-0 rounded-full bg-blue shadow-[0_4px_18px_rgba(0,84,166,0.5)]"
-                  />
-                )}
-                <item.icon
-                  size={17}
-                  strokeWidth={1.7}
-                  className={clsx(
-                    'relative z-10 transition-colors duration-300',
-                    isActive ? 'text-paper' : 'text-ink-muted group-hover:text-ink',
-                  )}
-                />
-                <span className="glass-strong pointer-events-none absolute right-full mr-2 whitespace-nowrap rounded-full px-3.5 py-1.5 label-caps text-ink opacity-0 shadow-lg transition-all duration-300 group-hover:mr-3.5 group-hover:opacity-100">
-                  {item.label}
-                </span>
-              </>
-            )}
-          </NavLink>
+          <SideNavItem key={item.id} item={item} />
         ))}
 
         <div className="my-0.5 h-px w-7 bg-ink/10" />

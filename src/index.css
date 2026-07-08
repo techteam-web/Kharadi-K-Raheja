@@ -137,20 +137,13 @@
     color: var(--color-paper);
   }
 
-  /* Slim, quiet scrollbars for kiosk feel */
-  ::-webkit-scrollbar {
-    width: 6px;
-    height: 6px;
+  /* Scrolling stays functional everywhere; the scrollbar chrome itself is just never shown. */
+  * {
+    scrollbar-width: none;
+    -ms-overflow-style: none;
   }
-  ::-webkit-scrollbar-track {
-    background: transparent;
-  }
-  ::-webkit-scrollbar-thumb {
-    background: var(--color-hairline);
-    border-radius: 4px;
-  }
-  ::-webkit-scrollbar-thumb:hover {
-    background: var(--color-ink-muted);
+  *::-webkit-scrollbar {
+    display: none;
   }
 
   button {
@@ -208,5 +201,19 @@
     box-shadow:
       0 8px 32px rgba(0, 0, 0, 0.25),
       inset 0 1px 0 rgba(255, 255, 255, 0.08);
+  }
+
+  /* Edge-fades a horizontal snap-scroll row so it still reads as scrollable now that the
+     scrollbar itself is hidden everywhere. Only needed while the row is actually scrollable —
+     these carousels all switch to a static grid at lg, so the fade turns off there too. */
+  .scroll-fade-x {
+    mask-image: linear-gradient(to right, transparent, black 20px, black calc(100% - 20px), transparent);
+    -webkit-mask-image: linear-gradient(to right, transparent, black 20px, black calc(100% - 20px), transparent);
+  }
+  @media (min-width: 1024px) {
+    .scroll-fade-x {
+      mask-image: none;
+      -webkit-mask-image: none;
+    }
   }
 }

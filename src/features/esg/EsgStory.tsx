@@ -1,4 +1,5 @@
 import { motion } from 'framer-motion';
+import { AnimatedCounter } from '@/components/ui/AnimatedCounter';
 import { fadeUp, staggerChildren } from '@/animations/motion';
 import type { EsgSection } from '@/types';
 
@@ -40,7 +41,9 @@ export function EsgStory({ section, index, reverse }: EsgStoryProps) {
           {section.body}
         </motion.p>
         <motion.div variants={fadeUp} className="mt-5 flex items-baseline gap-3 sm:mt-7 lg:mt-9">
-          <span className="font-display text-3xl text-green sm:text-4xl">{section.metric.value}</span>
+          <span className="font-display text-3xl text-green sm:text-4xl">
+            <AnimatedCounter value={section.metric.value} />
+          </span>
           <span className="label-caps text-ink-muted">{section.metric.label}</span>
         </motion.div>
       </div>

@@ -1,5 +1,6 @@
 import { motion } from 'framer-motion';
 import { SectionLabel } from '@/components/ui/SectionLabel';
+import { AnimatedCounter } from '@/components/ui/AnimatedCounter';
 import { COMPANY_STATS } from '@/data/about';
 import { fadeUp, staggerChildren } from '@/animations/motion';
 import overviewImage from '@/assets/images/about-corporate-overview.webp';
@@ -38,7 +39,9 @@ export function OverviewSlide() {
         >
           {COMPANY_STATS.map((stat) => (
             <motion.div key={stat.label} variants={fadeUp}>
-              <div className="font-display text-2xl text-ink sm:text-3xl lg:text-4xl">{stat.value}</div>
+              <div className="font-display text-2xl text-ink sm:text-3xl lg:text-4xl">
+                <AnimatedCounter value={stat.value} />
+              </div>
               <div className="mt-1 label-caps text-ink-muted lg:mt-2">{stat.label}</div>
             </motion.div>
           ))}

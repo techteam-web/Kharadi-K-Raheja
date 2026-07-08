@@ -4,6 +4,7 @@ import { AnimatePresence, motion } from 'framer-motion';
 import { SideNav } from './SideNav';
 import { pageTransition } from '@/animations/motion';
 import { LoadingScreen } from './LoadingScreen';
+import brainwingLogo from '@/assets/images/Brainwing-logo.webp';
 
 export function AppShell() {
   const location = useLocation();
@@ -29,6 +30,14 @@ export function AppShell() {
         </div>
       </main>
       <SideNav />
+
+      {/* Studio watermark — bottom-left on mobile (clear of the nav FAB), bottom-right on
+          desktop (clear of the vertically-centered rail). */}
+      <img
+        src={brainwingLogo}
+        alt="Brainwing Innovations"
+        className="pointer-events-none fixed bottom-5 left-5 z-30 h-6 w-auto opacity-50 lg:right-6 lg:bottom-6 lg:left-auto lg:h-8"
+      />
     </div>
   );
 }

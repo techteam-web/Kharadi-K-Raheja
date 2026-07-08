@@ -20,7 +20,7 @@ export function BusinessesSlide() {
 
       <motion.div
         variants={staggerChildren(0.08)}
-        className="mt-5 flex snap-x gap-4 overflow-x-auto pb-2 lg:mt-12 lg:grid lg:grid-cols-4 lg:gap-5 lg:overflow-visible lg:pb-0"
+        className="scroll-fade-x mt-5 flex snap-x gap-4 overflow-x-auto pb-2 lg:mt-12 lg:grid lg:grid-cols-4 lg:gap-5 lg:overflow-visible lg:pb-0"
       >
         {BUSINESS_VERTICALS.map((vertical) => (
           <motion.div
