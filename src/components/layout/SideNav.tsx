@@ -177,7 +177,7 @@ export function SideNav() {
                       <>
                         <span
                           className={clsx(
-                            'absolute inset-0 transition-colors duration-300',
+                            'absolute inset-0 rounded-2xl transition-colors duration-300',
                             isActive ? 'bg-blue' : 'glass-soft',
                           )}
                         />

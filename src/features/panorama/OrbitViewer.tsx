@@ -11,12 +11,27 @@ interface OrbitViewerProps {
   autoRotate?: boolean;
 }
 
+/** Frames loaded first, evenly spaced around the full circle, so dragging unlocks in ~1/4 the time. */
+const CORE_FRAME_TARGET = 18;
+
 function frameSrc(framePath: string, index: number) {
   return `${framePath}/f${String(index).padStart(3, '0')}.webp`;
 }
 
 function wrap(index: number, count: number) {
   return ((index % count) + count) % count;
+}
+
+/** Nearest frame that's actually been fetched — so swapping `src` never triggers a live network request mid-drag. */
+function nearestLoadedFrame(target: number, loaded: Set<number>, frameCount: number) {
+  if (loaded.has(target)) return target;
+  for (let d = 1; d < frameCount; d++) {
+    const forward = wrap(target + d, frameCount);
+    if (loaded.has(forward)) return forward;
+    const backward = wrap(target - d, frameCount);
+    if (loaded.has(backward)) return backward;
+  }
+  return target;
 }
 
 export function OrbitViewer({
@@ -29,8 +44,12 @@ export function OrbitViewer({
   const [currentFrame, setCurrentFrame] = useState(0);
   const [loadedCount, setLoadedCount] = useState(0);
   const [firstFrameReady, setFirstFrameReady] = useState(false);
+  // True once the sparse "core" frame set has loaded — dragging unlocks here, well before
+  // the full sequence finishes; the remaining frames keep filling in silently after this.
+  const [coreReady, setCoreReady] = useState(false);
   const [isDragging, setIsDragging] = useState(false);
 
+  const loadedFramesRef = useRef<Set<number>>(new Set());
   const dragStartX = useRef(0);
   const dragStartFrame = useRef(0);
   const hasInteractedRef = useRef(false);
@@ -38,10 +57,16 @@ export function OrbitViewer({
 
   const allLoaded = loadedCount >= frameCount;
 
-  // Frame 0 paints as soon as it's in — the rest load in the background afterward,
-  // in order, so the loading bar reflects real sequential progress.
   useEffect(() => {
     let cancelled = false;
+    loadedFramesRef.current = new Set();
+
+    const sparseStep = Math.max(1, Math.round(frameCount / CORE_FRAME_TARGET));
+    const coreIndices: number[] = [];
+    for (let i = 0; i < frameCount; i += sparseStep) coreIndices.push(i);
+    const coreSet = new Set(coreIndices);
+    const restIndices: number[] = [];
+    for (let i = 0; i < frameCount; i++) if (!coreSet.has(i)) restIndices.push(i);
 
     const loadFrame = (index: number) =>
       new Promise<void>((resolve) => {
@@ -49,6 +74,7 @@ export function OrbitViewer({
         img.decoding = 'async';
         img.onload = () => {
           if (cancelled) return resolve();
+          loadedFramesRef.current.add(index);
           if (index === 0) setFirstFrameReady(true);
           setLoadedCount((c) => c + 1);
           resolve();
@@ -59,10 +85,18 @@ export function OrbitViewer({
       });
 
     (async () => {
-      await loadFrame(0);
-      for (let i = 1; i < frameCount; i++) {
+      // Core pass: evenly spaced frames covering the full 360°, fastest path to "draggable".
+      for (const index of coreIndices) {
         if (cancelled) return;
-        await loadFrame(i);
+        await loadFrame(index);
+      }
+      if (cancelled) return;
+      setCoreReady(true);
+
+      // Backfill pass: fills in the rest so rotation sharpens from coarse to smooth.
+      for (const index of restIndices) {
+        if (cancelled) return;
+        await loadFrame(index);
       }
     })();
 
@@ -72,14 +106,14 @@ export function OrbitViewer({
   }, [framePath, frameCount]);
 
   useEffect(() => {
-    if (!autoRotate || !allLoaded) return;
+    if (!autoRotate || !coreReady) return;
     autoRotateTimerRef.current = window.setInterval(() => {
       setCurrentFrame((f) => wrap(f + 1, frameCount));
     }, 90);
     return () => {
       if (autoRotateTimerRef.current !== null) window.clearInterval(autoRotateTimerRef.current);
     };
-  }, [autoRotate, allLoaded, frameCount]);
+  }, [autoRotate, coreReady, frameCount]);
 
   const updateFromClientX = useCallback(
     (clientX: number) => {
@@ -129,7 +163,7 @@ export function OrbitViewer({
   }, [handleMouseMove, handleTouchMove, stopDrag]);
 
   const startDrag = (clientX: number) => {
-    if (!allLoaded) return;
+    if (!coreReady) return;
     if (!hasInteractedRef.current && autoRotateTimerRef.current !== null) {
       window.clearInterval(autoRotateTimerRef.current);
       autoRotateTimerRef.current = null;
@@ -156,17 +190,18 @@ export function OrbitViewer({
 
   const loadPct = Math.round((loadedCount / frameCount) * 100);
   const angle = Math.round((currentFrame / frameCount) * 360);
+  const displayFrame = nearestLoadedFrame(currentFrame, loadedFramesRef.current, frameCount);
 
   return (
     <div
       onMouseDown={handleMouseDown}
       onTouchStart={handleTouchStart}
-      style={{ aspectRatio, cursor: !allLoaded ? 'wait' : isDragging ? 'grabbing' : 'grab' }}
+      style={{ aspectRatio, cursor: !coreReady ? 'wait' : isDragging ? 'grabbing' : 'grab' }}
       className="relative h-full w-full select-none overflow-hidden bg-surface"
     >
       {firstFrameReady && (
         <img
-          src={frameSrc(framePath, currentFrame)}
+          src={frameSrc(framePath, displayFrame)}
           alt="360° view of the building exterior"
           draggable={false}
           className="pointer-events-none h-full w-full object-cover"

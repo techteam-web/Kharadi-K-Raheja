@@ -49,6 +49,15 @@
   html {
     background: var(--color-paper);
     color-scheme: light;
+
+    /* Shared by body::before and .intro-loader-bg, so the splash and the real page
+       backdrop are pixel-identical and swap theme in lockstep. */
+    --gradient-mesh:
+      radial-gradient(1100px 760px at 6% -8%, rgba(0, 84, 166, 0.16), transparent 60%),
+      radial-gradient(900px 680px at 102% 6%, rgba(0, 166, 81, 0.14), transparent 58%),
+      radial-gradient(820px 820px at 18% 104%, rgba(0, 84, 166, 0.1), transparent 60%),
+      radial-gradient(760px 760px at 88% 96%, rgba(0, 166, 81, 0.12), transparent 58%),
+      #f7f8f8;
   }
 
   /* ---- Dark mode ----
@@ -71,6 +80,12 @@
     --color-glass-soft: rgba(36, 38, 45, 0.4);
     --color-glass-border: rgba(255, 255, 255, 0.12);
     --color-glass-dark: rgba(6, 7, 9, 0.6);
+    --gradient-mesh:
+      radial-gradient(1100px 760px at 6% -8%, rgba(0, 84, 166, 0.32), transparent 60%),
+      radial-gradient(900px 680px at 102% 6%, rgba(0, 166, 81, 0.24), transparent 58%),
+      radial-gradient(820px 820px at 18% 104%, rgba(0, 84, 166, 0.18), transparent 60%),
+      radial-gradient(760px 760px at 88% 96%, rgba(0, 166, 81, 0.2), transparent 58%),
+      #0a0b0e;
     --color-glass-dark-border: rgba(255, 255, 255, 0.14);
   }
 
@@ -92,26 +107,12 @@
     inset: 0;
     z-index: 0;
     pointer-events: none;
-    background:
-      radial-gradient(1100px 760px at 6% -8%, rgba(0, 84, 166, 0.16), transparent 60%),
-      radial-gradient(900px 680px at 102% 6%, rgba(0, 166, 81, 0.14), transparent 58%),
-      radial-gradient(820px 820px at 18% 104%, rgba(0, 84, 166, 0.1), transparent 60%),
-      radial-gradient(760px 760px at 88% 96%, rgba(0, 166, 81, 0.12), transparent 58%),
-      #f7f8f8;
+    background: var(--gradient-mesh);
     transition: background-color 0.4s ease;
   }
 
   html[data-theme='dark'] body {
     background: #0a0b0e;
-  }
-
-  html[data-theme='dark'] body::before {
-    background:
-      radial-gradient(1100px 760px at 6% -8%, rgba(0, 84, 166, 0.32), transparent 60%),
-      radial-gradient(900px 680px at 102% 6%, rgba(0, 166, 81, 0.24), transparent 58%),
-      radial-gradient(820px 820px at 18% 104%, rgba(0, 84, 166, 0.18), transparent 60%),
-      radial-gradient(760px 760px at 88% 96%, rgba(0, 166, 81, 0.2), transparent 58%),
-      #0a0b0e;
   }
 
   #root {
@@ -215,5 +216,11 @@
       mask-image: none;
       -webkit-mask-image: none;
     }
+  }
+
+  /* Same backdrop as body::before, so the intro splash reads as the app rather than a
+     separate loading page. */
+  .intro-loader-bg {
+    background: var(--gradient-mesh);
   }
 }
