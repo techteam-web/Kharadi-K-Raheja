@@ -1,17 +1,30 @@
 import { useState } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
-import { ChevronLeft, ChevronRight, Download } from 'lucide-react';
+import { ChevronLeft, ChevronRight, Download, Loader2 } from 'lucide-react';
 import { Button } from '@/components/ui/Button';
 import { BROCHURE_PAGES } from '@/data/misc';
+import { generateBrochurePdf } from './generateBrochurePdf';
 
 export function BrochureViewer() {
   const [index, setIndex] = useState(0);
+  const [isDownloading, setIsDownloading] = useState(false);
   const page = BROCHURE_PAGES[index];
   const isFirst = index === 0;
   const isLast = index === BROCHURE_PAGES.length - 1;
 
   const go = (dir: 1 | -1) => {
     setIndex((i) => Math.min(BROCHURE_PAGES.length - 1, Math.max(0, i + dir)));
+  };
+
+  const handleDownload = async () => {
+    if (isDownloading) return;
+    setIsDownloading(true);
+    try {
+      const doc = await generateBrochurePdf(BROCHURE_PAGES);
+      doc.save('Kharadi-57-Brochure.pdf');
+    } finally {
+      setIsDownloading(false);
+    }
   };
 
   return (
@@ -64,8 +77,15 @@ export function BrochureViewer() {
       </div>
 
       <div className="mt-4 sm:mt-10">
-        <Button variant="accent" icon={Download}>
-          Download Brochure
+        <Button
+          variant="accent"
+          icon={isDownloading ? Loader2 : Download}
+          iconClassName={isDownloading ? 'animate-spin' : undefined}
+          onClick={handleDownload}
+          disabled={isDownloading}
+          className={isDownloading ? 'opacity-70' : undefined}
+        >
+          {isDownloading ? 'Preparing…' : 'Download Brochure'}
         </Button>
       </div>
     </div>

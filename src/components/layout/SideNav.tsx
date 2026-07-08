@@ -103,13 +103,12 @@ export function SideNav() {
         </button>
       </motion.nav>
 
-      {/* Mobile / tablet — floating action button, same vertical-center-right zone as the
-          desktop rail so it never collides with each page's own top or bottom-corner content */}
+      {/* Mobile / tablet — floating action button, bottom-right corner */}
       <motion.button
         {...fadeProps}
         onClick={() => setMenuOpen(true)}
         aria-label="Open navigation menu"
-        className="glass-strong fixed right-5 top-1/2 z-40 flex h-14 w-14 -translate-y-1/2 items-center justify-center rounded-full active:scale-95 transition-transform duration-200 lg:hidden"
+        className="glass-strong fixed right-5 bottom-5 z-40 flex h-14 w-14 items-center justify-center rounded-full active:scale-95 transition-transform duration-200 lg:hidden"
       >
         <activeItem.icon size={19} strokeWidth={1.7} className="text-blue" />
       </motion.button>

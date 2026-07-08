@@ -9,6 +9,7 @@ type ButtonVariant = 'primary' | 'accent' | 'secondary' | 'ghost';
 interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   variant?: ButtonVariant;
   icon?: LucideIcon;
+  iconClassName?: string;
   hideDefaultIcon?: boolean;
   children: ReactNode;
 }
@@ -25,7 +26,7 @@ const VARIANT_CLASSES: Record<ButtonVariant, string> = {
 };
 
 export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
-  ({ variant = 'primary', icon: Icon, hideDefaultIcon, className, children, ...props }, ref) => {
+  ({ variant = 'primary', icon: Icon, iconClassName, hideDefaultIcon, className, children, ...props }, ref) => {
     const ShownIcon = Icon ?? (variant !== 'ghost' && !hideDefaultIcon ? ArrowRight : undefined);
 
     return (
@@ -44,7 +45,7 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
           <ShownIcon
             size={14}
             strokeWidth={2}
-            className="transition-transform duration-300 group-hover:translate-x-0.5"
+            className={clsx('transition-transform duration-300 group-hover:translate-x-0.5', iconClassName)}
           />
         )}
       </button>
