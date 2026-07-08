@@ -2,14 +2,14 @@ import type { PlanView, EsgSection, BrochurePage } from '@/types';
 import masterLayoutPlan from '@/assets/images/Master layout Plan.webp';
 import groundFloorPlan from '@/assets/images/Ground Floor plan.webp';
 import typicalOfficeFloorPlan from '@/assets/images/Typical office floor plan.webp';
-import esgPlanetImage from '@/assets/images/esg-planet.jpg';
-import esgEfficiencyImage from '@/assets/images/esg-efficiency.jpg';
-import esgWaterImage from '@/assets/images/esg-water.jpg';
-import heroImage from '@/assets/images/hero.jpeg';
-import facadeImage from '@/assets/images/detail-facade.jpg';
-import brochureLocationImage from '@/assets/images/brochure-location.jpg';
-import brochureDesignImage from '@/assets/images/brochure-design.jpg';
-import brochureContactImage from '@/assets/images/brochure-contact.jpg';
+import esgPlanetImage from '@/assets/images/esg-planet.webp';
+import esgEfficiencyImage from '@/assets/images/esg-efficiency.webp';
+import esgWaterImage from '@/assets/images/esg-water.webp';
+import heroImage from '@/assets/images/hero.webp';
+import facadeImage from '@/assets/images/detail-facade.webp';
+import brochureLocationImage from '@/assets/images/brochure-location.webp';
+import brochureDesignImage from '@/assets/images/brochure-design.webp';
+import brochureContactImage from '@/assets/images/brochure-contact.webp';
 
 export const PLAN_VIEWS: PlanView[] = [
   {

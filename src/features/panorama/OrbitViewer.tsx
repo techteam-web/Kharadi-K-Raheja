@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
 
 interface OrbitViewerProps {
-  /** Public path the frames are served from, e.g. "/orbit-frames" -> /orbit-frames/f000.jpg */
+  /** Public path the frames are served from, e.g. "/orbit-frames" -> /orbit-frames/f000.webp */
   framePath?: string;
   frameCount?: number;
   /** Pixels of horizontal drag per frame step — lower is more sensitive. */
@@ -12,7 +12,7 @@ interface OrbitViewerProps {
 }
 
 function frameSrc(framePath: string, index: number) {
-  return `${framePath}/f${String(index).padStart(3, '0')}.jpg`;
+  return `${framePath}/f${String(index).padStart(3, '0')}.webp`;
 }
 
 function wrap(index: number, count: number) {

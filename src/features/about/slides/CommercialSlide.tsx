@@ -3,7 +3,7 @@ import { Check } from 'lucide-react';
 import { SectionLabel } from '@/components/ui/SectionLabel';
 import { COMMERCIAL_FEATURES } from '@/data/about';
 import { fadeUp, staggerChildren } from '@/animations/motion';
-import commercialImage from '@/assets/images/about-commercial-workplace.jpg';
+import commercialImage from '@/assets/images/about-commercial-workplace.webp';
 
 export function CommercialSlide() {
   return (

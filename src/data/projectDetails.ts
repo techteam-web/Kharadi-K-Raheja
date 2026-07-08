@@ -1,14 +1,14 @@
 import type { ProjectDetailCategory } from '@/types';
-import facadeImage from '@/assets/images/detail-facade.jpg';
-import dropOffImage from '@/assets/images/detail-drop-off.jpg';
-import securityImage from '@/assets/images/detail-security.jpg';
-import ambulanceImage from '@/assets/images/detail-ambulance.jpg';
-import lobbyImage from '@/assets/images/detail-lobby.jpg';
-import liftLobbyImage from '@/assets/images/detail-lift-lobby.jpg';
-import parkingImage from '@/assets/images/detail-parking.jpg';
-import landscapeImage from '@/assets/images/detail-landscape.jpg';
-import fnbImage from '@/assets/images/detail-fnb.jpg';
-import businessCenterImage from '@/assets/images/detail-business-center.jpg';
+import facadeImage from '@/assets/images/detail-facade.webp';
+import dropOffImage from '@/assets/images/detail-drop-off.webp';
+import securityImage from '@/assets/images/detail-security.webp';
+import ambulanceImage from '@/assets/images/detail-ambulance.webp';
+import lobbyImage from '@/assets/images/detail-lobby.webp';
+import liftLobbyImage from '@/assets/images/detail-lift-lobby.webp';
+import parkingImage from '@/assets/images/detail-parking.webp';
+import landscapeImage from '@/assets/images/detail-landscape.webp';
+import fnbImage from '@/assets/images/detail-fnb.webp';
+import businessCenterImage from '@/assets/images/detail-business-center.webp';
 
 export const PROJECT_DETAIL_CATEGORIES: ProjectDetailCategory[] = [
   {

@@ -2,7 +2,7 @@ import { motion } from 'framer-motion';
 import { SectionLabel } from '@/components/ui/SectionLabel';
 import { COMPANY_STATS } from '@/data/about';
 import { fadeUp, staggerChildren } from '@/animations/motion';
-import overviewImage from '@/assets/images/about-corporate-overview.jpg';
+import overviewImage from '@/assets/images/about-corporate-overview.webp';
 
 export function OverviewSlide() {
   return (

@@ -3,7 +3,7 @@ import { motion, useScroll, useTransform } from 'framer-motion';
 import { ChevronDown } from 'lucide-react';
 import { Button } from '@/components/ui/Button';
 import { fadeUp, staggerChildren } from '@/animations/motion';
-import heroImage from '@/assets/images/hero.jpeg';
+import heroImage from '@/assets/images/hero.webp';
 
 interface HeroSectionProps {
   onExplore: () => void;
